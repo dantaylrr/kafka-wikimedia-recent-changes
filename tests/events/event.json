@@ -1,0 +1,39 @@
+{
+    "$schema": "/mediawiki/recentchange/1.0.0",
+    "meta": {
+      "uri": "https://www.wikidata.org/wiki/Wikidata:Database_reports/Constraint_violations/P2738",
+      "request_id": "12044b10-f624-44f3-b2f0-aa780438ed6f",
+      "id": "ca304030-f403-41d9-ae89-363f0a297c79",
+      "dt": "2023-09-28T08:19:53Z",
+      "domain": "www.wikidata.org",
+      "stream": "mediawiki.recentchange",
+      "topic": "codfw.mediawiki.recentchange",
+      "partition": 0,
+      "offset": 647009549
+    },
+    "id": 2043561231,
+    "type": "edit",
+    "namespace": 4,
+    "title": "Wikidata:Database reports/Constraint violations/P2738",
+    "title_url": "https://www.wikidata.org/wiki/Wikidata:Database_reports/Constraint_violations/P2738",
+    "comment": "report update for [[Property:P2738]]",
+    "timestamp": 1695889193,
+    "user": "KrBot2",
+    "bot": true,
+    "notify_url": "https://www.wikidata.org/w/index.php?diff=1983046473&oldid=1981899312&rcid=2043561231",
+    "minor": false,
+    "patrolled": true,
+    "length": {
+      "old": 8203,
+      "new": 8203
+    },
+    "revision": {
+      "old": 1981899312,
+      "new": 1983046473
+    },
+    "server_url": "https://www.wikidata.org",
+    "server_name": "www.wikidata.org",
+    "server_script_path": "/w",
+    "wiki": "wikidatawiki",
+    "parsedcomment": "report update for <a href=\"/wiki/Property:P2738\" title=\"‎disjoint union of‎ | ‎every instance of this class is an instance of exactly one class in that list of classes. Use &quot;list item&quot; P11260 as qualifiers to specify the list of classes‎\"><span class=\"wb-itemlink\"><span class=\"wb-itemlink-label\" lang=\"en\" dir=\"ltr\">disjoint union of</span> <span class=\"wb-itemlink-id\">(P2738)</span></span></a>"
+  }
