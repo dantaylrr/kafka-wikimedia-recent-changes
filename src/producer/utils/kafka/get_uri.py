@@ -1,17 +1,17 @@
 import logging
 from sys import stdout
-import json
 
 # Init logger
 logging.basicConfig(stream=stdout, level=logging.INFO)
 logger = logging.getLogger(name=__name__)
+
 
 def get_event_uri(event: dict):
     """
     Parse the given event & extract the web URI to use as the message key
     """
     try:
-        uri = event.get('meta').get('uri')
+        uri = event.get("meta").get("uri")
 
         return uri
     except Exception as ex:

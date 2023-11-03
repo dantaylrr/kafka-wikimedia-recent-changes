@@ -8,11 +8,13 @@ from sseclient import SSEClient
 logging.basicConfig(stream=stdout, level=logging.INFO)
 logger = logging.getLogger(name=__name__)
 
+
 def _generate_headers():
     """
     Generate content headers for API request.
     """
-    return {'Content-type': 'text/event-stream'}
+    return {"Content-type": "text/event-stream"}
+
 
 def _mount_endpoint():
     """
@@ -24,7 +26,10 @@ def _mount_endpoint():
         req_session = Session()
         # Mount our retry strategy onto the session
         req_session.mount(
-            prefix="https://", adapter=HTTPAdapter(max_retries=Retry(total=5, status_forcelist=[500, 501, 502, 503, 504]))
+            prefix="https://",
+            adapter=HTTPAdapter(
+                max_retries=Retry(total=5, status_forcelist=[500, 501, 502, 503, 504])
+            ),
         )
 
         # Return the session for re-usability throughout code
@@ -34,6 +39,7 @@ def _mount_endpoint():
             f"Failure to successfully mount endpoint with retry strategy: {ex} - allowing application to continue..."
         )
 
+
 def stream_data(session: Session = _mount_endpoint()):
     """
     Issue a GET request to the recent changes endpoint.
@@ -42,7 +48,11 @@ def stream_data(session: Session = _mount_endpoint()):
     """
     try:
         # Get API response
-        stream_source = session.get(url='https://stream.wikimedia.org/v2/stream/recentchange', stream=True, headers=_generate_headers())
+        stream_source = session.get(
+            url="https://stream.wikimedia.org/v2/stream/recentchange",
+            stream=True,
+            headers=_generate_headers(),
+        )
 
         # Return generator object / client
         return SSEClient(event_source=stream_source)
