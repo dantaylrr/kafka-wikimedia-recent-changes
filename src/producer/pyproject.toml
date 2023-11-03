@@ -3,13 +3,13 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "kafka-recent-changes-test"
+name = "kafka-recent-changes-producer"
 version = "0.1"
 authors = [
     {name = "Daniel Taylor", email = "danieltaylorr97@gmail.com"},
 ]
 description = "Stream wikimedia recent changes into local kafka topics."
-requires-python = ">=3.8"
+requires-python = ">=3.9.5"
 classifiers = [
     "Programming Language :: Python :: 3"
 ]
@@ -20,4 +20,4 @@ dynamic = ["dependencies"]
 dependencies = {file = ["requirements.txt"]}
 
 [tool.setuptools]
-packages = ["src", "src.producer", "src.producer.main", "src.producer.utils", "src.producer.utils.api", "src.producer.utils.kafka"]
+packages = ["producer", "producer.main", "producer.utils", "producer.utils.api", "producer.utils.kafka"]
