@@ -41,11 +41,5 @@ build-virtualenv:
 	test -d $(PRODUCER_PWD)/$(VENV) || $(HOME)/.pyenv/versions/$(PYTHON_VERSION)/bin/python -m venv $(PRODUCER_PWD)/$(VENV)
 	test -d $(CONSUMER_PWD)/$(VENV) || $(HOME)/.pyenv/versions/$(PYTHON_VERSION)/bin/python -m venv $(CONSUMER_PWD)/$(VENV)
 
-.PHONY: install
-install:
-### Install dependencies in virtual environment.
-	@echo "${GREEN}Installing dependencies."
-	. $(PRODUCER_PWD)/$(VENV)/bin/activate && pip install -r $(PRODUCER_PWD)/requirements.txt
-
 .PHONY: setup
-setup: clean build-virtualenv install
+setup: clean build-virtualenv

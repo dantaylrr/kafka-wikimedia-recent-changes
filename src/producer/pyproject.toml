@@ -1,23 +1,19 @@
+[tool.poetry]
+name = "recent-changes-producer"
+version = "0.1.0"
+description = "Producer that pulls wikimedia recent changes and publishes each event to a local kafka topic."
+authors = ["Daniel Taylor <dannyyyyt@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.scripts]
+recent-changes-producer = "recent_changes_producer.app:main"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+confluent-kafka = "2.2.0"
+requests = "2.26.0"
+sseclient-py = "1.8.0"
+
 [build-system]
-requires = ["setuptools", "setuptools-scm"]
-build-backend = "setuptools.build_meta"
-
-[project]
-name = "kafka-recent-changes-producer"
-version = "0.1"
-authors = [
-    {name = "Daniel Taylor", email = "danieltaylorr97@gmail.com"},
-]
-description = "Stream wikimedia recent changes into local kafka topics."
-requires-python = ">=3.9.5"
-classifiers = [
-    "Programming Language :: Python :: 3"
-]
-
-dynamic = ["dependencies"]
-
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
-
-[tool.setuptools]
-packages = ["producer", "producer.main", "producer.utils", "producer.utils.api", "producer.utils.kafka"]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

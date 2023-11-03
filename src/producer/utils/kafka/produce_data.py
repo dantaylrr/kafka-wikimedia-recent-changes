@@ -27,6 +27,6 @@ def produce_data(
 ):
     """
     Produce data to a given topic
-
+    Side-effect producing function may need refactoring in future.
     """
-    return producer.produce(topic=topic_name, key=key, value=data, on_delivery=callback)
+    producer.produce(topic=topic_name, key=key, value=data, on_delivery=callback)

@@ -2,9 +2,9 @@ import logging
 from sys import stdout
 import json
 from confluent_kafka import Producer
-from src.producer.utils.kafka.produce_data import produce_data
-from src.producer.utils.kafka.get_uri import get_event_uri
-from src.producer.utils.api.api_utils import stream_data
+from utils.kafka.produce_data import produce_data
+from utils.kafka.get_uri import get_event_uri
+from utils.api.api_utils import stream_data
 
 # Initialise the logger
 logging.basicConfig(stream=stdout, level=logging.INFO)
