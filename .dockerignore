@@ -1,0 +1,15 @@
+### Ignore everything
+
+*
+
+### Except
+
+!./code/producer/app.py
+!./code/producer/rcp_utils
+!./code/producer/pyproject.toml
+!./code/producer/poetry.lock
+
+!./code/consumer/app.py
+!./code/consumer/rcc_utils
+!./code/consumer/pyproject.toml
+!./code/consumer/poetry.lock

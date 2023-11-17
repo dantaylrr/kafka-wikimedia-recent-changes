@@ -1,12 +1,13 @@
 [tool.poetry]
-name = "recent-changes-producer"
+name = "rcp_utils"
 version = "0.1.0"
 description = "Producer that pulls wikimedia recent changes and publishes each event to a local kafka topic."
-authors = ["Daniel Taylor <dannyyyyt@gmail.com>"]
+authors = ["dantaylrr <dannyyyyt@gmail.com>"]
 readme = "README.md"
 
-[tool.poetry.scripts]
-recent-changes-producer = "recent_changes_producer.app:main"
+packages = [
+    { include = "rcp_utils" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -15,5 +16,5 @@ requests = "2.26.0"
 sseclient-py = "1.8.0"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

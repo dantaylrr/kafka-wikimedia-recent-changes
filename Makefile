@@ -1,8 +1,8 @@
 # Global vars.
 VENV=.venv
 PYTHON_VERSION=3.9.5
-PRODUCER_PWD=src/producer
-CONSUMER_PWD=src/consumer
+PRODUCER_PWD=code/producer
+CONSUMER_PWD=code/consumer
 
 # Define standard colours.
 GREEN=\033[0;32m
@@ -14,8 +14,8 @@ clean:
 ### Remove any existing virtual environments & temp files.
 	@echo "${RED}Removing existing virtual environments."
 	rm -rf .python-version
-	rm -rf src/producer/$(VENV)
-	rm -rf src/consumer/$(VENV)
+	rm -rf $(PRODUCER_PWD)/$(VENV)
+	rm -rf $(CONSUMER_PWD)/$(VENV)
 
 	@echo "${GREEN}Removing temp files${NORMAL}"
 	-rm -rf .cache

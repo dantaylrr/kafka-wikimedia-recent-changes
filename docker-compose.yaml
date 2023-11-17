@@ -1,0 +1,9 @@
+version: "1"
+
+services:
+  kafka-producer:
+    build:
+      context: .
+      dockerfile: docker/producer.Dockerfile
+      args:
+        - LOCAL_IP=$LOCAL_IP

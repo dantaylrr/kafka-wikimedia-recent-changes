@@ -1,15 +1,22 @@
 import logging
+import os
 from sys import stdout
 import json
+
+from pip import _internal
+_internal.main(['list'])
+
 from confluent_kafka import Producer
-from utils.kafka.produce_data import produce_data
-from utils.kafka.get_uri import get_event_uri
-from utils.api.api_utils import stream_data
+
+from rcp_utils.kafka.produce_data import produce_data
+from rcp_utils.kafka.get_uri import get_event_uri
+from rcp_utils.api.api_utils import stream_data
 
 # Initialise the logger
 logging.basicConfig(stream=stdout, level=logging.INFO)
 logger = logging.getLogger(name=__name__)
 
+LOCAL_IP = os.environ["LOCAL_IP"]
 
 def main():
     """
@@ -22,7 +29,7 @@ def main():
 
     # Define kafka configuration properties
     k_conf = {
-        "bootstrap.servers": "localhost:9092",
+        "bootstrap.servers": f"{LOCAL_IP}:9092",
     }
 
     # Init producer class
@@ -55,7 +62,7 @@ def main():
         except KeyboardInterrupt:
             break
 
-    # Flush the producer of messagess
+    # Flush the producer of messages
     producer.flush()
 
 
