@@ -21,9 +21,9 @@ except KeyError as ex:
         f"{ex} - AWS Access Keys not set correctly, try re-setting & trying again."
     )
 
+
 # Orchestrator
 def main():
-
     # Init spark
     spark = (
         SparkSession.builder.master("local[*]")
@@ -42,9 +42,12 @@ def main():
 
     transformed_df = _transform_data(df=df)
 
-    _write_data(df=transformed_df, s3_destination=f"{S3_BUCKET}/wikimedia-changes", s3_checkpoints_destination=f"{S3_CHECKPOINTS_BUCKET}/wikimedia-changes")
+    _write_data(
+        df=transformed_df,
+        s3_destination=f"{S3_BUCKET}/wikimedia-changes",
+        s3_checkpoints_destination=f"{S3_CHECKPOINTS_BUCKET}/wikimedia-changes",
+    )
 
 
 if __name__ == "__main__":
-
     main()

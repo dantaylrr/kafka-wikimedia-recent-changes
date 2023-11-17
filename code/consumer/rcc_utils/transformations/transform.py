@@ -4,6 +4,7 @@ from pyspark.sql.types import StringType
 
 from rcc_utils.schema.schema import generate_schema
 
+
 # Read the data from the local kafka topic into a spark structured stream - our Kafka topic is of binary types
 def _read_data(spark: SparkSession, local_ip: str, topic_name: str):
     df = (
@@ -16,6 +17,7 @@ def _read_data(spark: SparkSession, local_ip: str, topic_name: str):
 
     return df
 
+
 # Transform the dataframe into a human-readable dataset, convert our binary columns into strings
 def _transform_data(df: DataFrame):
     transformed_df = (
@@ -27,9 +29,9 @@ def _transform_data(df: DataFrame):
 
     return transformed_df
 
+
 # Write the data out to the S3 location specified
 def _write_data(df: DataFrame, s3_destination: str, s3_checkpoints_destination: str):
-
     df.writeStream.format("parquet").outputMode("append").partitionBy(
         "__processing_date"
     ).option("path", f"s3a://{s3_destination}").option(

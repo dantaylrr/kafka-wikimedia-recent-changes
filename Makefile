@@ -4,6 +4,12 @@ PYTHON_VERSION=3.9.5
 PRODUCER_PWD=code/producer
 CONSUMER_PWD=code/consumer
 
+# Build variables
+PRODUCER_PACKAGE=rcp_utils
+PRODUCER_BUILD_VERSION=1.0.0
+CONSUMER_PACKAGE=rcc_utils
+CONSUMER_BUILD_VERSION=1.0.0
+
 # Define standard colours.
 GREEN=\033[0;32m
 RED=\033[0;31m
@@ -14,8 +20,7 @@ clean:
 ### Remove any existing virtual environments & temp files.
 	@echo "${RED}Removing existing virtual environments."
 	rm -rf .python-version
-	rm -rf $(PRODUCER_PWD)/$(VENV)
-	rm -rf $(CONSUMER_PWD)/$(VENV)
+	rm -rf $(VENV)
 
 	@echo "${GREEN}Removing temp files${NORMAL}"
 	-rm -rf .cache
@@ -35,27 +40,43 @@ build-virtualenv:
 	@echo "${GREEN}Installing default python version using pyenv."
 	pyenv install -s $(PYTHON_VERSION)
 	pyenv local $(PYTHON_VERSION)
-
-### Create virtual environment using source path to the python version binary we have just installed.
-	@echo "${GREEN}Creating virtual environments."
-	test -d $(PRODUCER_PWD)/$(VENV) || $(HOME)/.pyenv/versions/$(PYTHON_VERSION)/bin/python -m venv $(PRODUCER_PWD)/$(VENV)
-	test -d $(CONSUMER_PWD)/$(VENV) || $(HOME)/.pyenv/versions/$(PYTHON_VERSION)/bin/python -m venv $(CONSUMER_PWD)/$(VENV)
+	@echo "${GREEN}Creating virtual environment."
+	test -d $(VENV) || $(HOME)/.pyenv/versions/$(PYTHON_VERSION)/bin/python -m venv $(VENV)
 
 ### Install dependencies & packages ready for local development (producer)
-build-dev-env-producer:
-	@echo "${GREEN}Installing dependencies & producer project for local producer development."
+build-whl-producer:
+	@echo "${GREEN}Building project wheel for local producer development."
 	cd $(PRODUCER_PWD) && \
-	source $(VENV)/bin/activate \
-	poetry install
+	poetry build
+
+copy-whl-producer:
+	@echo "${GREEN}Copying wheel into python virtual environment."
+	cp $(PRODUCER_PWD)/dist/$(PRODUCER_PACKAGE)-$(PRODUCER_BUILD_VERSION)-py3-none-any.whl $(VENV)
+
+install-whl-producer:
+	@echo "${GREEN}Installing wheel into python virtual environment."
+	. $(VENV)/bin/activate && \
+	pip install $(VENV)/$(PRODUCER_PACKAGE)-$(PRODUCER_BUILD_VERSION)-py3-none-any.whl && \
+	pip install pre-commit >=3.1 && \
 	pre-commit install
 
-build-dev-env-consumer:
-	@echo "${GREEN}Installing dependencies & consumer project for local consumer development."
-	cd $(CONSUMER_PWD)/$(VENV) && \
-	source $(VENV)/bin/activate && \
-	poetry install && \
+### Install dependencies & packages ready for local development (producer)
+build-whl-consumer:
+	@echo "${GREEN}Building project wheel for local producer development."
+	cd $(CONSUMER_PWD) && \
+	poetry build
+
+copy-whl-consumer:
+	@echo "${GREEN}Copying wheel into python virtual environment."
+	cp $(CONSUMER_PWD)/dist/$(CONSUMER_PACKAGE)-$(CONSUMER_BUILD_VERSION)-py3-none-any.whl $(VENV)
+
+install-whl-consumer:
+	@echo "${GREEN}Installing wheel into python virtual environment."
+	. $(VENV)/bin/activate && \
+	pip install $(VENV)/$(CONSUMER_PACKAGE)-$(CONSUMER_BUILD_VERSION)-py3-none-any.whl && \
+	pip install pre-commit >=3.1 && \
 	pre-commit install
 
-setup-dev-producer: clean build-virtualenv build-dev-env-producer
+setup-producer: clean build-virtualenv build-whl-producer copy-whl-producer install-whl-producer
 
-setup-dev-consumer: clean build-virtualenv build-dev-env-consumer
+setup-consumer: clean build-virtualenv build-whl-consumer copy-whl-consumer install-whl-consumer

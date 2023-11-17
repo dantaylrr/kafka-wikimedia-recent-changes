@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rcc_utils"
-version = "0.1.0"
+version = "1.0.0"
 description = "Consumer that pulls data from a local kafka topic & saves the data as parquet in S3."
 authors = ["dantaylrr <dannyyyyt@gmail.com>"]
 readme = "README.md"

@@ -3,9 +3,6 @@ import os
 from sys import stdout
 import json
 
-from pip import _internal
-_internal.main(['list'])
-
 from confluent_kafka import Producer
 
 from rcp_utils.kafka.produce_data import produce_data
@@ -17,6 +14,7 @@ logging.basicConfig(stream=stdout, level=logging.INFO)
 logger = logging.getLogger(name=__name__)
 
 LOCAL_IP = os.environ["LOCAL_IP"]
+
 
 def main():
     """
