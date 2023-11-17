@@ -57,7 +57,7 @@ install-whl-producer:
 	@echo "${GREEN}Installing wheel into python virtual environment."
 	. $(VENV)/bin/activate && \
 	pip install $(VENV)/$(PRODUCER_PACKAGE)-$(PRODUCER_BUILD_VERSION)-py3-none-any.whl && \
-	pip install pre-commit >=3.1 && \
+	pip install "pre-commit>=3.1" && \
 	pre-commit install
 
 ### Install dependencies & packages ready for local development (producer)
@@ -74,7 +74,7 @@ install-whl-consumer:
 	@echo "${GREEN}Installing wheel into python virtual environment."
 	. $(VENV)/bin/activate && \
 	pip install $(VENV)/$(CONSUMER_PACKAGE)-$(CONSUMER_BUILD_VERSION)-py3-none-any.whl && \
-	pip install pre-commit >=3.1 && \
+	pip install "pre-commit>=3.1" && \
 	pre-commit install
 
 setup-producer: clean build-virtualenv build-whl-producer copy-whl-producer install-whl-producer
