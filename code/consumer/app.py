@@ -1,11 +1,16 @@
 import logging
 from sys import stdout
 import os
+from dotenv import load_dotenv
 
 from pyspark.sql import SparkSession
 
 from rcc_utils.transformations.transform import _read_data, _transform_data, _write_data
 
+# Loads in our env variable defined in our .env file
+load_dotenv("./.env")
+
+# Initialise logger
 logging.basicConfig(level=logging.INFO, stream=stdout)
 logger = logging.getLogger(name=__name__)
 

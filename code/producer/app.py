@@ -2,6 +2,7 @@ import logging
 import os
 from sys import stdout
 import json
+from dotenv import load_dotenv
 
 from confluent_kafka import Producer
 
@@ -9,7 +10,10 @@ from rcp_utils.kafka.produce_data import produce_data
 from rcp_utils.kafka.get_uri import get_event_uri
 from rcp_utils.api.api_utils import stream_data
 
-# Initialise the logger
+# Load our environment variables using dotenv
+load_dotenv("./.env")
+
+# Initialise logger
 logging.basicConfig(stream=stdout, level=logging.INFO)
 logger = logging.getLogger(name=__name__)
 
