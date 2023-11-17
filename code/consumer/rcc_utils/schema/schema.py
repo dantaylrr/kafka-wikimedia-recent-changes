@@ -6,6 +6,9 @@ from pyspark.sql.types import StructType, StructField, StringType, BooleanType, 
 logging.basicConfig(level=logging.INFO, stream=stdout)
 logger = logging.getLogger(name=__name__)
 
+# Hello!
+
+
 def generate_schema():
     return StructType(
         [

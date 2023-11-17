@@ -41,5 +41,21 @@ build-virtualenv:
 	test -d $(PRODUCER_PWD)/$(VENV) || $(HOME)/.pyenv/versions/$(PYTHON_VERSION)/bin/python -m venv $(PRODUCER_PWD)/$(VENV)
 	test -d $(CONSUMER_PWD)/$(VENV) || $(HOME)/.pyenv/versions/$(PYTHON_VERSION)/bin/python -m venv $(CONSUMER_PWD)/$(VENV)
 
-.PHONY: setup
-setup: clean build-virtualenv
+### Install dependencies & packages ready for local development (producer)
+build-dev-env-producer:
+	@echo "${GREEN}Installing dependencies & producer project for local producer development."
+	cd $(PRODUCER_PWD) && \
+	source $(VENV)/bin/activate \
+	poetry install
+	pre-commit install
+
+build-dev-env-consumer:
+	@echo "${GREEN}Installing dependencies & consumer project for local consumer development."
+	cd $(CONSUMER_PWD)/$(VENV) && \
+	source $(VENV)/bin/activate && \
+	poetry install && \
+	pre-commit install
+
+setup-dev-producer: clean build-virtualenv build-dev-env-producer
+
+setup-dev-consumer: clean build-virtualenv build-dev-env-consumer
