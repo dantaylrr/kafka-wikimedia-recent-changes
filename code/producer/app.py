@@ -11,13 +11,18 @@ from rcp_utils.kafka.get_uri import get_event_uri
 from rcp_utils.api.api_utils import stream_data
 
 # Load our environment variables using dotenv
-load_dotenv("./.env")
+load_dotenv()
 
 # Initialise logger
 logging.basicConfig(stream=stdout, level=logging.INFO)
 logger = logging.getLogger(name=__name__)
 
-LOCAL_IP = os.environ["LOCAL_IP"]
+try:
+    LOCAL_IP = os.environ["LOCAL_IP"]
+except KeyError as ex:
+    raise Exception(
+        f"{ex} - AWS Access Keys not set correctly, try re-setting & trying again."
+    )
 
 
 def main():

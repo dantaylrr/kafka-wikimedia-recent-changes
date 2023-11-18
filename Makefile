@@ -20,7 +20,9 @@ clean:
 ### Remove any existing virtual environments & temp files.
 	@echo "${RED}Removing existing virtual environments."
 	rm -rf .python-version
-	rm -rf $(VENV)
+	rm -rf $(VENV)	
+	rm -rf $(PRODUCER_PWD)/$(VENV)
+	rm -rf $(CONSUMER_PWD)/$(VENV)
 
 	@echo "${GREEN}Removing temp files${NORMAL}"
 	-rm -rf .cache
@@ -42,41 +44,37 @@ build-virtualenv:
 	pyenv local $(PYTHON_VERSION)
 	@echo "${GREEN}Creating virtual environment."
 	test -d $(VENV) || $(HOME)/.pyenv/versions/$(PYTHON_VERSION)/bin/python -m venv $(VENV)
+	test -d $(PRODUCER_PWD)/$(VENV) || $(HOME)/.pyenv/versions/$(PYTHON_VERSION)/bin/python -m venv $(PRODUCER_PWD)/$(VENV)
+	test -d $(CONSUMER_PWD)/$(VENV) || $(HOME)/.pyenv/versions/$(PYTHON_VERSION)/bin/python -m venv $(CONSUMER_PWD)/$(VENV)
 
-### Install dependencies & packages ready for local development (producer)
-build-whl-producer:
+### Build root environment for non-application code changes
+build-environment-root:
+	. $(VENV)/bin/activate && \
+	pip install "pre-commit>=3.1" && \
+	pre-commit install
+
+### Install dependencies & packages ready for local producer development
+build-environment-producer:
 	@echo "${GREEN}Building project wheel for local producer development."
 	cd $(PRODUCER_PWD) && \
-	poetry build
-
-copy-whl-producer:
-	@echo "${GREEN}Copying wheel into python virtual environment."
-	cp $(PRODUCER_PWD)/dist/$(PRODUCER_PACKAGE)-$(PRODUCER_BUILD_VERSION)-py3-none-any.whl $(VENV)
-
-install-whl-producer:
-	@echo "${GREEN}Installing wheel into python virtual environment."
 	. $(VENV)/bin/activate && \
-	pip install $(VENV)/$(PRODUCER_PACKAGE)-$(PRODUCER_BUILD_VERSION)-py3-none-any.whl && \
-	pip install "pre-commit>=3.1" && \
-	pre-commit install
+	poetry install
 
-### Install dependencies & packages ready for local development (producer)
-build-whl-consumer:
-	@echo "${GREEN}Building project wheel for local producer development."
+### Install dependencies & packages ready for local consumer development
+build-environment-consumer:
+	@echo "${GREEN}Building project wheel for local consumer development."
 	cd $(CONSUMER_PWD) && \
-	poetry build
-
-copy-whl-consumer:
-	@echo "${GREEN}Copying wheel into python virtual environment."
-	cp $(CONSUMER_PWD)/dist/$(CONSUMER_PACKAGE)-$(CONSUMER_BUILD_VERSION)-py3-none-any.whl $(VENV)
-
-install-whl-consumer:
-	@echo "${GREEN}Installing wheel into python virtual environment."
 	. $(VENV)/bin/activate && \
-	pip install $(VENV)/$(CONSUMER_PACKAGE)-$(CONSUMER_BUILD_VERSION)-py3-none-any.whl && \
-	pip install "pre-commit>=3.1" && \
-	pre-commit install
+	poetry install
 
-setup-producer: clean build-virtualenv build-whl-producer copy-whl-producer install-whl-producer
+.PHONY: setup
+setup: clean build-virtualenv build-environment-root build-environment-producer build-environment-consumer
 
-setup-consumer: clean build-virtualenv build-whl-consumer copy-whl-consumer install-whl-consumer
+run-producer:
+	@echo "${GREEN}Running producer app on docker container."
+	docker compose up
+
+run-consumer:
+	@echo "${GREEN}Running consumer code on local spark cluster - press ctrl-c to exit."
+	. $(CONSUMER_PWD)/$(VENV)/bin/activate && \
+	spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.apache.hadoop:hadoop-aws:3.2.2 ./$(CONSUMER_PWD)/app.py
