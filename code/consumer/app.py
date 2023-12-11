@@ -1,14 +1,10 @@
 import logging
 from sys import stdout
 import os
-from dotenv import load_dotenv
 
 from pyspark.sql import SparkSession
 
 from rcc_utils.transformations.transform import _read_data, _transform_data, _write_data
-
-# Loads in our env variable defined in our .env file
-load_dotenv()
 
 # Initialise logger
 logging.basicConfig(level=logging.INFO, stream=stdout)
@@ -23,7 +19,7 @@ try:
     S3_CHECKPOINTS_BUCKET = os.environ["AWS_S3_CHECKPOINTS_STORAGE_BUCKET"]
 except KeyError as ex:
     raise Exception(
-        f"{ex} - AWS Access Keys not set correctly, try re-setting & trying again."
+        f"{ex} - environment variables not set correctly, try resetting them & running the application again."
     )
 
 

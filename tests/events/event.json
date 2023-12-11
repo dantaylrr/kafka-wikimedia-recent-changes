@@ -1,39 +1,29 @@
 {
-    "$schema": "/mediawiki/recentchange/1.0.0",
-    "meta": {
-      "uri": "https://www.wikidata.org/wiki/Wikidata:Database_reports/Constraint_violations/P2738",
-      "request_id": "12044b10-f624-44f3-b2f0-aa780438ed6f",
-      "id": "ca304030-f403-41d9-ae89-363f0a297c79",
-      "dt": "2023-09-28T08:19:53Z",
-      "domain": "www.wikidata.org",
-      "stream": "mediawiki.recentchange",
-      "topic": "codfw.mediawiki.recentchange",
-      "partition": 0,
-      "offset": 647009549
-    },
-    "id": 2043561231,
-    "type": "edit",
-    "namespace": 4,
-    "title": "Wikidata:Database reports/Constraint violations/P2738",
-    "title_url": "https://www.wikidata.org/wiki/Wikidata:Database_reports/Constraint_violations/P2738",
-    "comment": "report update for [[Property:P2738]]",
-    "timestamp": 1695889193,
-    "user": "KrBot2",
-    "bot": true,
-    "notify_url": "https://www.wikidata.org/w/index.php?diff=1983046473&oldid=1981899312&rcid=2043561231",
-    "minor": false,
-    "patrolled": true,
-    "length": {
-      "old": 8203,
-      "new": 8203
-    },
-    "revision": {
-      "old": 1981899312,
-      "new": 1983046473
-    },
-    "server_url": "https://www.wikidata.org",
-    "server_name": "www.wikidata.org",
-    "server_script_path": "/w",
-    "wiki": "wikidatawiki",
-    "parsedcomment": "report update for <a href=\"/wiki/Property:P2738\" title=\"‎disjoint union of‎ | ‎every instance of this class is an instance of exactly one class in that list of classes. Use &quot;list item&quot; P11260 as qualifiers to specify the list of classes‎\"><span class=\"wb-itemlink\"><span class=\"wb-itemlink-label\" lang=\"en\" dir=\"ltr\">disjoint union of</span> <span class=\"wb-itemlink-id\">(P2738)</span></span></a>"
-  }
+  "$schema": "/mediawiki/recentchange/1.0.0",
+  "meta": {
+    "dt": "2023-11-17T14:20:27Z",
+    "partition": 0,
+    "offset": 775215388,
+    "stream": "mediawiki.recentchange",
+    "domain": "zh.wiktionary.org",
+    "topic": "codfw.mediawiki.recentchange",
+    "id": "84f7250d-13bb-4f4d-8dfc-8e5bf37320a9",
+    "request_id": "7c436eb5-543a-4dd2-a9e7-9768cc96dfc5",
+    "uri": "https://zh.wiktionary.org/wiki/Category:%E6%B4%BE%E7%94%9F%E8%87%AA%E6%8B%89%E4%B8%81%E8%AA%9E%E7%9A%84%E6%84%8F%E5%A4%A7%E5%88%A9%E8%AA%9E%E8%A9%9E"
+  },
+  "bot": false,
+  "comment": "[[:desolazione]]已添加至分类",
+  "id": 14922220,
+  "namespace": 14,
+  "notify_url": "https://zh.wiktionary.org/w/index.php?diff=7917098&oldid=0&rcid=14922220",
+  "parsedcomment": "<a href=\"/wiki/desolazione\" title=\"desolazione\">desolazione</a>已添加至分类",
+  "server_name": "zh.wiktionary.org",
+  "server_script_path": "/w",
+  "server_url": "https://zh.wiktionary.org",
+  "timestamp": 1700230827,
+  "title": "Category:派生自拉丁語的意大利語詞",
+  "title_url": "https://zh.wiktionary.org/wiki/Category:%E6%B4%BE%E7%94%9F%E8%87%AA%E6%8B%89%E4%B8%81%E8%AA%9E%E7%9A%84%E6%84%8F%E5%A4%A7%E5%88%A9%E8%AA%9E%E8%A9%9E",
+  "type": "categorize",
+  "user": "Sayonzei",
+  "wiki": "zhwiktionary"
+}
