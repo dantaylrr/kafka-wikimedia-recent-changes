@@ -12,6 +12,7 @@ def _read_data(spark: SparkSession, local_ip: str, topic_name: str):
         .option("kafka.bootstrap.servers", f"{local_ip}:9092")
         .option("subscribe", f"{topic_name}")
         .option("startingOffsets", "earliest")
+        .option("failOnDataLoss", "false")
         .load()
     )
 
