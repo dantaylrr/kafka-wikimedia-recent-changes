@@ -203,6 +203,7 @@ tests/
 .flake8
 .gitignore
 .pre-commit-config.yaml
+.secrets.bassline
 docker-compose.yaml
 Makefile
 README.md
